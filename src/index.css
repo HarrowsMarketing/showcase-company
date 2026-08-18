@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #f5f5f5;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes h-sprinkle-fall {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) rotate(var(--rot)); opacity: 0; }
+}
+.h-sprinkle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  animation: h-sprinkle-fall var(--dur) cubic-bezier(0.4, 0, 1, 1) forwards;
+}
