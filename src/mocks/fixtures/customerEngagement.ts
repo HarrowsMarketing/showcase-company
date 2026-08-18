@@ -107,7 +107,7 @@ export function regionsFor(card: string) {
     const contacts = Array.from({ length: nContacts }, (_, ci) => {
       const daysSince = weightedBool(rng, 0.9) ? randInt(rng, 0, 400) : null
       const score: 'A' | 'B' | 'C' = daysSince == null ? 'C' : daysSince <= 60 ? 'A' : daysSince <= 180 ? 'B' : 'C'
-      return { id: `${card}-contact-${i}-${ci}`, name: contactNameFor(rng), email: `${contactNameFor(rng).toLowerCase().replace(' ', '.')}@example.com`, jobTitle: pick(rng, ['Facilities Manager', 'Head of Workplace', 'Procurement Lead', 'Interior Designer', 'Office Manager']), lastContacted: daysSince != null ? ymd(addDays(NOW, -daysSince)) : null, score, isDesigner: weightedBool(rng, 0.6) }
+      return { id: `${card}-contact-${i}-${ci}`, name: contactNameFor(rng), email: `${contactNameFor(rng).toLowerCase().replace(' ', '.')}@example.com`, jobTitle: pick(rng, ['Purchasing Manager', 'Store Manager', 'Procurement Lead', 'Trade Sales Manager', 'Operations Manager']), lastContacted: daysSince != null ? ymd(addDays(NOW, -daysSince)) : null, score, isDesigner: weightedBool(rng, 0.6) }
     })
     return {
       companyId: `${account?.id || 'unknown'}-loc-${i}`, name: `${card} — ${cityPool[i % cityPool.length]}`, city: cityPool[i % cityPool.length], confirmed: weightedBool(rng, 0.75),
@@ -162,10 +162,10 @@ export function companyProfile(id: string) {
     const score: 'A' | 'B' | 'C' = pick(rng, ['A', 'A', 'B', 'B', 'C'])
     scoreCounts[score]++
     const isDesigner = weightedBool(rng, 0.65)
-    return { id: `${id}-c-${i}`, name: contactNameFor(rng), email: `contact${i}@example.com`, jobTitle: pick(rng, ['Interior Designer', 'Facilities Manager', 'Procurement Lead', 'Office Manager']), isDesigner, lastContact: ymd(addDays(NOW, -randInt(rng, 0, 300))), score }
+    return { id: `${id}-c-${i}`, name: contactNameFor(rng), email: `contact${i}@example.com`, jobTitle: pick(rng, ['Purchasing Manager', 'Store Manager', 'Procurement Lead', 'Operations Manager']), isDesigner, lastContact: ymd(addDays(NOW, -randInt(rng, 0, 300))), score }
   })
   return {
-    company: { id, name: account.name, domain: `${account.name.toLowerCase().replace(/[^a-z0-9]+/g, '')}.example.com`, industry: pick(rng, ['Architecture', 'Healthcare', 'Education', 'Financial Services', 'Construction', 'Hospitality']), city: pick(rng, ['Auckland', 'Wellington', 'Christchurch', 'Sydney', 'Melbourne']), phone: `+64 9 ${randInt(rng, 200, 999)} ${randInt(rng, 1000, 9999)}`, numberOfEmployees: String(randInt(rng, 20, 900)), description: `${account.name} is a long-standing client account in the customer engagement programme.` },
+    company: { id, name: account.name, domain: `${account.name.toLowerCase().replace(/[^a-z0-9]+/g, '')}.example.com`, industry: pick(rng, ['Hardware Retail', 'Trade Supplies', 'Construction', 'Industrial', 'Mining', 'Equipment Rental']), city: pick(rng, ['Auckland', 'Wellington', 'Christchurch', 'Sydney', 'Melbourne']), phone: `+64 9 ${randInt(rng, 200, 999)} ${randInt(rng, 1000, 9999)}`, numberOfEmployees: String(randInt(rng, 20, 900)), description: `${account.name} is a long-standing client account in the customer engagement programme.` },
     contacts, designerCount: contacts.filter(c => c.isDesigner).length, designerScoreCounts: scoreCounts,
   }
 }

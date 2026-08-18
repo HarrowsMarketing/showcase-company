@@ -179,7 +179,7 @@ const TAG_POOL = [
   { label: 'Existing customer contact', pts: 18 }, { label: 'From referral', pts: 14 },
 ]
 const STATUS_POOL = ['OPEN_DEAL', 'IN_PROGRESS', 'LEAD']
-const TITLE_POOL = ['Facilities Manager', 'Head of Workplace', 'Procurement Lead', 'Office Manager', 'Director of Operations', 'Interior Designer', 'Project Manager', 'CFO', 'HR Director']
+const TITLE_POOL = ['Purchasing Manager', 'Trade Sales Manager', 'Procurement Lead', 'Store Manager', 'Director of Operations', 'Warehouse Manager', 'Project Manager', 'CFO', 'HR Director']
 export const HUBSPOT_LEADS = (() => {
   const rng = rngFor('hubspot-leads')
   const leads = Array.from({ length: 25 }, (_, i) => {
@@ -266,7 +266,7 @@ export function formsFor(_country: 'NZ' | 'AU') {
 // ── /api/hubspot/emails [LIGHT] ──────────────────────────────────────────────
 export const HUBSPOT_EMAILS = (() => {
   const rng = rngFor('hubspot-emails')
-  const names = ['August Product Newsletter', 'New Showroom Launch', 'End of FY Clearance', 'Winter Workspace Guide', 'Customer Spotlight: Meridian', 'Sustainability Report 2026', 'EOFY Trade Offer', 'New Range: Height-Adjustable Desks', 'Webinar Invite: Workplace Trends', 'Case Study: Beacon Health']
+  const names = ['August Product Newsletter', 'New Showroom Launch', 'End of FY Clearance', 'Winter Trade Guide', 'Customer Spotlight: BuildRight', 'Sustainability Report 2026', 'EOFY Trade Offer', 'New Range: Cordless Tools', 'Webinar Invite: Trade Industry Trends', 'Case Study: Northgate Hardware']
   let sentTotal = 0, deliveredTotal = 0, unsubTotal = 0, openSum = 0, clickSum = 0
   const campaigns = names.map((name, i) => {
     const sent = randInt(rng, 3500, 9200)

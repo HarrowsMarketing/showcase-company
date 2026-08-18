@@ -4,9 +4,9 @@ import { rngFor, pick, randInt, randFloat } from '../prng'
 import { NOW, ymd, addDays, addMonths, shortMonthLabel } from './company'
 import { contactNameFor, dealName, dealAmount } from './dealGen'
 
-const COMPANY_POOL = ['Meridian Workspaces', 'Beacon Health Group', 'Solstice Architects', 'Northfield University', 'Vantage Legal Partners', 'Cobalt Financial', 'Pinnacle Construction', 'Delta Logistics']
+const COMPANY_POOL = ['Mitre Trade Hardware', 'Southern Cross Tool Co', 'BuildRight Merchants', 'Northgate Hardware Group', 'Anchor Construction Ltd', 'Delta Logistics', 'Pinnacle Construction', 'Ironbark Mining Corp']
 const LIFECYCLE_POOL = ['subscriber', 'lead', 'marketingqualifiedlead', 'salesqualifiedlead', 'opportunity']
-const JOB_TITLES = ['Facilities Manager', 'Head of Workplace', 'Procurement Lead', 'Office Manager', 'Operations Director']
+const JOB_TITLES = ['Purchasing Manager', 'Trade Sales Manager', 'Procurement Lead', 'Store Manager', 'Operations Director']
 
 // ── /api/meeting/snapshot?country= ──────────────────────────────────────────
 export function meetingSnapshot(_country: 'NZ' | 'AU') {
@@ -22,7 +22,7 @@ export function meetingSnapshot(_country: 'NZ' | 'AU') {
     },
     leads: { newThisWeek: randInt(rng, 12, 45), newYesterday: randInt(rng, 0, 8) },
     pipeline: { openValue: randInt(rng, 400000, 900000), openCount: randInt(rng, 20, 60), newDealsThisWeek: randInt(rng, 3, 12) },
-    email: { name: 'August Product Newsletter', subject: 'New arrivals for spring workspaces', sent: randInt(rng, 4000, 9000), openRate: randFloat(rng, 16, 30, 1), clickRate: randFloat(rng, 1.5, 4.5, 1) },
+    email: { name: 'August Product Newsletter', subject: 'New arrivals for the workshop', sent: randInt(rng, 4000, 9000), openRate: randFloat(rng, 16, 30, 1), clickRate: randFloat(rng, 1.5, 4.5, 1) },
     mql: { total: randInt(rng, 800, 1400), newThisMonth: randInt(rng, 40, 110), sqlThisMonth: randInt(rng, 8, 28), sqlDebug: { mock: true } },
   }
 }

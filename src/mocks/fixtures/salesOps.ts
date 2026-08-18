@@ -118,10 +118,10 @@ export const DEALS_TO_WIN = (() => {
 
 // ── /api/sales/big-rocks ─────────────────────────────────────────────────────
 const ROCK_POOL = [
-  'Close Meridian Workspaces HQ fitout', 'Follow up Beacon Health quote', 'Site visit — Solstice Architects',
-  'Send revised proposal to Northfield University', 'Chase signature on Vantage Legal contract',
-  'Book demo for Cobalt Financial', 'Finalise Pinnacle Construction pricing', 'Reconnect with Delta Logistics',
-  'Prep RFQ response for Bright Path Schools', 'Review AU pipeline with Ironbark Mining',
+  'Close Mitre Trade Hardware bulk order', 'Follow up BuildRight Merchants quote', 'Site visit — Northgate Hardware Group',
+  'Send revised proposal to Southern Cross Tool Co', 'Chase signature on Anchor Construction contract',
+  'Book demo for Union Square Hardware', 'Finalise Pinnacle Construction pricing', 'Reconnect with Delta Logistics',
+  'Prep RFQ response for Cedar Ridge Builders', 'Review AU pipeline with Ironbark Mining',
 ]
 export const bigRocksStore = (() => {
   const rng = rngFor('big-rocks')

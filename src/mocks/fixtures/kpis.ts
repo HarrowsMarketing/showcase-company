@@ -51,7 +51,7 @@ export function kpisRecent(ownerId: string, type: string) {
   }))
   return { items }
 }
-const ORG_POOL: (string | null)[] = ['Meridian Workspaces', 'Beacon Health Group', 'Solstice Architects', 'Cobalt Financial', null]
+const ORG_POOL: (string | null)[] = ['Mitre Trade Hardware', 'BuildRight Merchants', 'Southern Cross Tool Co', 'Northgate Hardware Group', null]
 
 // ── /api/hubspot/kpis/monthly?prevFy= ───────────────────────────────────────
 export function kpisMonthly(prevFy: boolean) {

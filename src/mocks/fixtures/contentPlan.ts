@@ -16,9 +16,9 @@ const entryId = () => String(nextEntryId++)
 
 const ROW_LABELS = ['Campaigns', 'Trade Shows & Events', 'Social Content', 'Email / EDM', 'Blog & PR', 'Product Launches']
 const ENTRY_TITLES = [
-  'Spring Workspace Campaign', 'EOFY Trade Promotion', 'Design Week Showcase', 'Sustainability Report Launch',
-  'New Desking Range Launch', 'Customer Spotlight Series', 'Trade Show — BuildNZ', 'Webinar: Workplace Trends',
-  'Case Study: Meridian Workspaces', 'Winter Catalogue Drop', 'Referral Partner Push', 'Showroom Open Day',
+  'Spring Trade Campaign', 'EOFY Trade Promotion', 'New Product Range Showcase', 'Sustainability Report Launch',
+  'New Cordless Range Launch', 'Customer Spotlight Series', 'Trade Show — BuildNZ', 'Webinar: Trade Industry Trends',
+  'Case Study: BuildRight Merchants', 'Winter Catalogue Drop', 'Referral Partner Push', 'Showroom Open Day',
 ]
 
 function buildRows() {
@@ -44,9 +44,9 @@ function buildRows() {
 }
 
 export const contentPlanStore = {
-  theme: 'Designing Workspaces That Work Harder',
+  theme: 'Tools That Get The Job Done',
   quarterGoals: [
-    'Q1: Launch new height-adjustable desking range',
+    'Q1: Launch new cordless tool range',
     'Q2: Grow trade show presence across AU',
     'Q3: Refresh brand photography & case studies',
     'Q4: EOFY promotion push + FY27/28 planning',

@@ -3,19 +3,19 @@ import { rngFor, pick, randInt, randFloat } from '../prng'
 import { NOW, addDays } from './company'
 
 const CAPTIONS = [
-  'New arrivals for the modern workspace ✨', 'Behind the scenes at our Auckland showroom',
-  'Height-adjustable desking now in 6 finishes', 'Client spotlight: Meridian Workspaces HQ fitout',
-  'Sustainability meets design — our FSC-certified range', 'Boardroom goals 🪑', 'Ergonomics 101 with our design team',
-  'Say hello to our new breakout collection', 'Site visit day with the team', 'Proud to support local trade partners',
+  'New arrivals for the workshop 🛠️', 'Behind the scenes at our Auckland warehouse',
+  'Cordless range now in 4 voltage options', 'Trade partner spotlight: BuildRight Merchants stock drop',
+  'Built to last — every tool backed by our 5-year warranty', 'Toolbox goals 🧰', 'Torque 101 with our product team',
+  'Say hello to our new accessory range', 'Warehouse day with the team', 'Proud to support local trade partners',
 ]
 const LINKEDIN_TEXTS = [
-  'We\'re thrilled to share our latest workplace fitout for Meridian Workspaces — a full HQ transformation delivered on time and on budget.',
-  'Sustainability isn\'t a checkbox for us — every new product line is FSC-certified from source to showroom floor.',
-  'Hiring: we\'re growing our design team. If you love workplace design, we want to hear from you.',
+  'We\'re thrilled to announce our new exclusive distribution agreement with BuildRight Merchants — bringing our full power tool range to trade customers nationwide.',
+  'Reliability isn\'t a checkbox for us — every tool we import is warranty-tested before it reaches the shelf.',
+  'Hiring: we\'re growing our trade sales team. If you love the tools industry, we want to hear from you.',
 ]
 const PIN_TITLES = [
-  'Height-Adjustable Desk Setup Ideas', 'Modern Boardroom Inspiration', 'Breakout Space Layouts',
-  'Ergonomic Chair Guide', 'Reception Design Trends 2026', 'Acoustic Pod Workspaces',
+  'Cordless Drill Buying Guide', 'Workshop Storage Ideas', 'Trade Toolkit Essentials',
+  'Power Tool Maintenance Tips', 'DIY Starter Tool Set 2026', 'Garage Organisation Inspiration',
 ]
 
 // ── /api/social/instagram ───────────────────────────────────────────────────
@@ -29,7 +29,7 @@ export const SOCIAL_INSTAGRAM = (() => {
   }))
   const dailyTrend = Array.from({ length: 30 }, (_, i) => ({ date: addDays(NOW, -(29 - i)).toISOString().slice(0, 10), engagement: randInt(rng, 20, 260) }))
   return {
-    configured: true, username: 'yourcompany.furniture', followersCount: randInt(rng, 4200, 6800),
+    configured: true, username: 'yourcompany.tools', followersCount: randInt(rng, 4200, 6800),
     mediaCount: randInt(rng, 320, 640), avgLikes: randInt(rng, 60, 220), avgComments: randInt(rng, 2, 14),
     reach7d: randInt(rng, 2000, 9000), impressions7d: randInt(rng, 3500, 14000),
     recentPosts, dailyTrend,
@@ -59,5 +59,5 @@ export const SOCIAL_PINTEREST = (() => {
     date: addDays(NOW, -(29 - i)).toISOString().slice(0, 10),
     impressions: randInt(rng, 300, 2400), engagement: randInt(rng, 10, 140), clicks: randInt(rng, 2, 60),
   }))
-  return { configured: true, username: 'yourcompanyfurniture', followersCount: randInt(rng, 900, 2200), recentPins, dailyTrend }
+  return { configured: true, username: 'yourcompanytools', followersCount: randInt(rng, 900, 2200), recentPins, dailyTrend }
 })()

@@ -4,9 +4,9 @@ import { rngFor, pick, randInt, weightedBool } from '../prng'
 import { NOW, addDays } from './company'
 import { contactNameFor } from './dealGen'
 
-const COMPANY_POOL = ['Meridian Workspaces', 'Beacon Health Group', 'Solstice Architects', 'Northfield University', 'Vantage Legal Partners', 'Cobalt Financial', 'Pinnacle Construction', 'Delta Logistics', 'Union Square Studios', 'Redwood Capital']
-const JOB_TITLES = ['Facilities Manager', 'Head of Workplace', 'Procurement Lead', 'Office Manager', 'Interior Designer', 'Operations Director']
-const PAGE_URLS = ['/products/desking', '/products/seating', '/case-studies', '/pricing', '/contact', '/showroom', '/products/boardroom', '/blog/workplace-trends-2026']
+const COMPANY_POOL = ['Mitre Trade Hardware', 'Southern Cross Tool Co', 'BuildRight Merchants', 'Northgate Hardware Group', 'Anchor Construction Ltd', 'Delta Logistics', 'Ironbark Mining Corp', 'Union Square Hardware', 'Redwood Trade Supplies', 'Cedar Ridge Builders']
+const JOB_TITLES = ['Purchasing Manager', 'Trade Sales Manager', 'Procurement Lead', 'Store Manager', 'Operations Manager', 'Operations Director']
+const PAGE_URLS = ['/products/power-tools', '/products/hand-tools', '/case-studies', '/pricing', '/contact', '/showroom', '/products/accessories', '/blog/trade-trends-2026']
 const LEAD_SOURCES = ['Organic Search → Product Page', 'Paid Search → Landing Page', 'Referral → Case Study', 'Direct → Pricing', 'Email → Newsletter Click']
 
 function randomContact(rng: ReturnType<typeof rngFor>, i: number) {
@@ -42,7 +42,7 @@ export function contactBrief(contactId: string) {
   const rng = rngFor(`contact-brief-${contactId}`)
   const allPageViews = Array.from({ length: randInt(rng, 2, 10) }, () => ({ url: pick(rng, PAGE_URLS), title: pick(rng, ['Product Page', 'Case Study', 'Pricing', 'Contact', 'Showroom']), ts: addDays(NOW, -randInt(rng, 0, 30)).toISOString() }))
   const formSubmissions = weightedBool(rng, 0.6) ? [{ name: pick(rng, ['Request a Quote', 'Book a Showroom Visit', 'Download Catalogue']) }] : []
-  const products = Array.from({ length: randInt(rng, 1, 3) }, () => ({ name: pick(rng, ['Height-Adjustable Desk', 'Ergonomic Chair', 'Boardroom Table', 'Acoustic Pod']), count: randInt(rng, 1, 5) }))
+  const products = Array.from({ length: randInt(rng, 1, 3) }, () => ({ name: pick(rng, ['Cordless Drill Kit', 'Impact Driver', 'Tool Storage Case', 'Angle Grinder']), count: randInt(rng, 1, 5) }))
   return { allPageViews, formSubmissions, products }
 }
 

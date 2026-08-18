@@ -4,19 +4,19 @@ import { rngFor, pick, randInt, randFloat } from '../prng'
 import { NOW, ymd, addDays, addMonths, shortMonthLabel } from './company'
 
 const QUERY_POOL = [
-  'office furniture nz', 'ergonomic office chairs', 'height adjustable desk', 'boardroom table',
-  'commercial fitout furniture', 'reception furniture', 'office desking systems', 'breakout furniture nz',
-  'workplace furniture supplier', 'acoustic office pods', 'collaborative workspace furniture', 'ergonomic chair nz',
-  'office fitout company', 'contract furniture supplier', 'height adjustable standing desk', 'office storage solutions',
-  'meeting room furniture', 'commercial office chairs', 'modular office furniture', 'sit stand desk nz',
-  'workplace design furniture', 'office furniture showroom', 'sustainable office furniture', 'school furniture nz',
-  'healthcare furniture supplier',
+  'power tools nz', 'cordless drill nz', 'impact driver kit', 'angle grinder',
+  'trade tool supplier', 'wholesale power tools', 'tool distributor nz', 'hand tools nz',
+  'tool importer nz', 'cordless tool range', 'trade tool accounts', 'circular saw nz',
+  'tool wholesaler', 'bulk tools supplier', 'cordless nail gun', 'tool storage solutions',
+  'construction tools supplier', 'commercial power tools', 'multi-tool combo kit', 'belt sander nz',
+  'trade tool catalogue', 'tool showroom nz', 'durable trade tools', 'hardware store supplier',
+  'industrial tool supplier',
 ]
 const PAGE_POOL = [
-  '/', '/products/desking', '/products/seating', '/products/storage', '/about', '/contact',
-  '/case-studies', '/case-studies/meridian-workspaces', '/products/breakout', '/products/boardroom',
-  '/blog/height-adjustable-desks', '/blog/workplace-trends-2026', '/showroom', '/sustainability',
-  '/products/acoustic-pods', '/careers', '/services/fitout', '/services/design', '/products/reception', '/faq',
+  '/', '/products/power-tools', '/products/hand-tools', '/products/storage', '/about', '/contact',
+  '/case-studies', '/case-studies/buildright-merchants', '/products/accessories', '/products/combo-kits',
+  '/blog/cordless-drill-guide', '/blog/trade-trends-2026', '/showroom', '/sustainability',
+  '/products/cordless-range', '/careers', '/services/distribution', '/services/trade-accounts', '/products/warranty', '/faq',
 ]
 
 // ── /api/seo ─────────────────────────────────────────────────────────────────

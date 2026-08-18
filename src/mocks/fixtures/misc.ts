@@ -20,8 +20,8 @@ const emptyBands = () => ({ high: [] as number[], medium: [] as number[], low: [
 export const priorityOrderStore = { team: emptyBands(), individual: emptyBands() }
 
 // ── /api/production/samples ──────────────────────────────────────────────────
-const SAMPLE_NAMES = ['Aria Task Chair', 'Zenith Height-Adjustable Desk', 'Coastline Sofa Module', 'Meridian Boardroom Table', 'Lumen Acoustic Pod', 'Drift Breakout Stool', 'Halo Reception Desk', 'Contour Ergonomic Chair']
-const CLIENTS = ['Meridian Workspaces', 'Beacon Health Group', 'Solstice Architects', 'Northfield University', 'Ironbark Mining Corp']
+const SAMPLE_NAMES = ['Aria Cordless Drill Kit', 'Zenith Impact Driver', 'Coastline Angle Grinder', 'Meridian Circular Saw', 'Lumen Multi-Tool Combo Kit', 'Drift Belt Sander', 'Halo Cordless Nail Gun', 'Contour Tool Storage Case']
+const CLIENTS = ['Mitre Trade Hardware', 'Southern Cross Tool Co', 'BuildRight Merchants', 'Northgate Hardware Group', 'Ironbark Mining Corp']
 let sampleCounter = 1
 function buildSample(rng: ReturnType<typeof rngFor>, i: number) {
   const country: 'NZ' | 'AU' = rng() < 0.7 ? 'NZ' : 'AU'
@@ -36,7 +36,7 @@ function buildSample(rng: ReturnType<typeof rngFor>, i: number) {
     job_card: `JC-${randInt(rng, 1000, 9999)}`, salesperson: pick(rng, SALES_TEAM_NAMES),
     client_name: pick(rng, CLIENTS), delivery_location: pick(rng, CLIENTS),
     review_months: 6, value: randInt(rng, 400, 6500),
-    specs: [{ label: 'Fabric', value: pick(rng, ['Charcoal Weave', 'Ocean Blend', 'Sand Tweed']) }],
+    specs: [{ label: 'Power Source', value: pick(rng, ['18V Cordless', 'Corded', '20V Cordless']) }],
     date_out: dateOut, date_in: status === 'in' && dateOut ? ymd(addDays(NOW, -randInt(rng, 1, 20))) : null,
     estimated_return: status === 'out' ? ymd(addDays(NOW, randInt(rng, -10, 30))) : null,
     last_movement_date: ymd(addDays(NOW, -randInt(rng, 0, 90))), created_at: created.toISOString(),
@@ -53,7 +53,7 @@ export const ANALYSIS_RESULTS = (() => {
     customers: sources.map(source => ({ source, count: randInt(rng, 10, 200), pct: randFloat(rng, 5, 40, 1).toFixed(1) })),
     leads: sources.map(source => ({ source, count: randInt(rng, 10, 300), pct: randFloat(rng, 5, 40, 1).toFixed(1) })),
   }
-  const titles = ['Facilities Manager', 'Head of Workplace', 'Procurement Lead', 'Office Manager', 'Interior Designer']
+  const titles = ['Purchasing Manager', 'Trade Sales Manager', 'Procurement Lead', 'Store Manager', 'Operations Manager']
   return {
     generatedAt: NOW.toISOString(), customerCount: randInt(rng, 400, 900), leadCount: randInt(rng, 800, 1800),
     averages: { customers: { pageViews: randFloat(rng, 4, 12, 1), formSubmissions: randFloat(rng, 1, 3, 1) }, leads: { pageViews: randFloat(rng, 1, 5, 1), formSubmissions: randFloat(rng, 0.2, 1, 1) } },

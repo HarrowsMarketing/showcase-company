@@ -41,7 +41,7 @@ export const FY_MONTHS: FyMonthMeta[] = Array.from({ length: 12 }, (_, i) => {
 
 // Seasonal weighting across the FY (sums to 1) — a mild holiday dip in Dec/Jan,
 // a year-end push in March. Used to shape both target and actual curves so
-// they look like a real furniture-contracts business rather than flat lines.
+// they look like a real trade-distribution business rather than flat lines.
 const SEASONALITY = [0.075, 0.08, 0.085, 0.075, 0.08, 0.085, 0.09, 0.095, 0.07, 0.06, 0.085, 0.12]
 
 // ── The one true annual revenue number ──────────────────────────────────────
@@ -95,14 +95,14 @@ export const SALES_TEAM_NAMES = SALES_TEAM.map(p => p.name)
 // ── Customer / account roster (Customer Engagement Hub) ────────────────────
 export interface CeAccount { id: string; name: string; country: 'NZ' | 'AU'; manager: string; tier: 'Bronze' | 'Silver' | 'Gold' | 'Platinum' }
 const NZ_ACCOUNT_NAMES = [
-  'Meridian Workspaces', 'Beacon Health Group', 'Solstice Architects', 'Northfield University',
-  'Vantage Legal Partners', 'Cobalt Financial', 'Harborview Hotels', 'Pinnacle Construction',
-  'Bright Path Schools Trust', 'Delta Logistics', 'Evergreen District Council', 'Union Square Studios',
-  'Redwood Capital', 'Anchor Insurance', 'Cedar Ridge Developments', 'Fathom Design Collective',
+  'Mitre Trade Hardware', 'Southern Cross Tool Co', 'BuildRight Merchants', 'Northgate Hardware Group',
+  'Coastal Trade Supplies', 'Anchor Construction Ltd', 'Highline Equipment Rentals', 'Pinnacle Construction',
+  'Delta Logistics', 'Union Square Hardware', 'Redwood Trade Supplies', 'Cedar Ridge Builders',
+  'Fathom Tool Traders', 'Ironclad Hardware Co', 'Summit Trade Centre', 'Harbourline Industrial Supplies',
 ]
 const AU_ACCOUNT_NAMES = [
-  'Ironbark Mining Corp', 'Outback Property Group', 'Sapphire Coast Resorts', 'Great Southern Bank',
-  'Whitlam Health Alliance', 'Bondi Creative Agency',
+  'Ironbark Mining Corp', 'Outback Trade Supplies', 'Sapphire Coast Builders', 'Great Southern Tool Co',
+  'Whitlam Industrial Supplies', 'Bondi Trade Merchants',
 ]
 function buildAccounts(): CeAccount[] {
   const rng = rngFor('ce-accounts')

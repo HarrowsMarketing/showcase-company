@@ -37,7 +37,7 @@ interface ActivityLocation { companyId: string; name: string; city?: string; act
 interface ActivityAccount { name: string; manager: string; activity: Record<string, ActivityStatus>; locations?: ActivityLocation[] }
 interface ActivityData { accounts: ActivityAccount[]; activities: ActivityMeta[] }
 interface ActivityEntry { date: string; note: string | null }
-// Per-location (region) data for the card pop-up: each HubSpot studio location with
+// Per-location (region) data for the card pop-up: each HubSpot branch location with
 // its BD-cadence completion flags and the contacts linked to that location.
 interface RegionContact { id: string; name: string; email: string | null; jobTitle: string | null; lastContacted: string | null; score: 'A' | 'B' | 'C'; isDesigner: boolean }
 interface CompletionCell { status: 'green' | 'red'; lastDate: string | null; daysSince: number | null }
@@ -99,7 +99,7 @@ function RegionContactRow({ c, companyId, onToggle }: { c: RegionContact; compan
         {c.isDesigner && <p className="text-xs text-gray-400">{fmtLastContact(c.lastContacted)}</p>}
       </div>
       <span className="flex items-center gap-2 shrink-0">
-        <span className="text-xs text-gray-500">Designer</span>
+        <span className="text-xs text-gray-500">Buyer</span>
         <input type="checkbox" checked={c.isDesigner} onChange={e => onToggle(companyId, c.id, e.target.checked)}
           className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
       </span>
@@ -413,7 +413,7 @@ function AccountTile({ account, zone, proratedPct, metricLabel, onClick }: { acc
           <p className="text-xs font-bold text-gray-700 mt-0.5">{convRate !== null ? `${convRate}%` : '—'}</p>
         </div>
         <div>
-          <p className="text-xs text-gray-400">Designers</p>
+          <p className="text-xs text-gray-400">Buyers</p>
           <p className="text-xs font-bold text-gray-700 mt-0.5">
             {designerCount !== null ? `${engagedDesignerCount ?? 0}/${designerCount}` : '—'}
           </p>
@@ -643,7 +643,7 @@ function AccountModal({ account, owners, isAdmin, onClose, onLinked, onDeleted, 
   const [savingOwner, setSavingOwner] = useState(false)
   const [ownerErr, setOwnerErr] = useState<string | null>(null)
   const [deleting, setDeleting] = useState(false)
-  // Regions (studio locations) — fetched per card; admins can curate the genuine studios.
+  // Regions (branch locations) — fetched per card; admins can curate the genuine branches.
   const [regions, setRegions] = useState<RegionsData | null>(null)
   const [regionsLoading, setRegionsLoading] = useState(false)
   const [regionsErr, setRegionsErr] = useState<string | null>(null)
@@ -776,7 +776,7 @@ function AccountModal({ account, owners, isAdmin, onClose, onLinked, onDeleted, 
         const data: RegionsData = r.data
         setRegions(data)
         const confirmed = (data.locations || []).filter(l => l.confirmed).map(l => l.companyId)
-        // Default-tick everything until the studios have been curated.
+        // Default-tick everything until the branches have been curated.
         const sel = confirmed.length ? confirmed : (data.locations || []).map(l => l.companyId)
         setConfirmSel(new Set(sel))
       })
@@ -1009,7 +1009,7 @@ function AccountModal({ account, owners, isAdmin, onClose, onLinked, onDeleted, 
             </div>
           )}
 
-          {/* ── Regions (studio locations) ──────────────────────────── */}
+          {/* ── Regions (branch locations) ──────────────────────────── */}
           <div>
             <div className="flex items-center justify-between flex-wrap gap-2 mb-1">
               <p className="text-sm font-semibold text-gray-700">Regions</p>
@@ -1020,22 +1020,22 @@ function AccountModal({ account, owners, isAdmin, onClose, onLinked, onDeleted, 
                       className="px-3 py-1 text-xs font-semibold text-gray-500 hover:text-gray-700">Cancel</button>
                     <button onClick={saveLocations} disabled={savingLocs}
                       className="px-3 py-1 text-xs font-semibold bg-gray-900 text-white rounded-lg hover:bg-gray-700 transition-colors disabled:opacity-50">
-                      {savingLocs ? 'Saving…' : 'Save studios'}
+                      {savingLocs ? 'Saving…' : 'Save branches'}
                     </button>
                   </div>
                 ) : (
-                  <button onClick={() => setEditingLocs(true)} title="Edit which records are genuine studio locations"
+                  <button onClick={() => setEditingLocs(true)} title="Edit which records are genuine branch locations"
                     className="shrink-0 p-1 rounded text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                   </button>
                 )
               )}
             </div>
-            <p className="text-xs text-gray-400 mb-3">Each HubSpot studio location for this customer — its BD cadence and the contacts linked to it.{editingLocs ? ' Tick the genuine studios; untick duplicates or sub-entities, then Save.' : ''}</p>
+            <p className="text-xs text-gray-400 mb-3">Each HubSpot branch location for this customer — its BD cadence and the contacts linked to it.{editingLocs ? ' Tick the genuine branches; untick duplicates or sub-entities, then Save.' : ''}</p>
             {regionsLoading && <div className="space-y-2">{[0, 1].map(i => <div key={i} className="h-16 bg-gray-100 rounded-lg animate-pulse" />)}</div>}
             {regionsErr && <p className="text-sm text-red-600 bg-red-50 rounded-lg px-4 py-3">{regionsErr}</p>}
             {regions && !regionsLoading && regions.locations.length === 0 && (
-              <p className="text-sm text-gray-400 bg-gray-50 rounded-xl px-4 py-3">No HubSpot studio locations found for this customer.</p>
+              <p className="text-sm text-gray-400 bg-gray-50 rounded-xl px-4 py-3">No HubSpot branch locations found for this customer.</p>
             )}
             {regions && regions.locations.length > 0 && (
               <div className="space-y-3">
@@ -1048,7 +1048,7 @@ function AccountModal({ account, owners, isAdmin, onClose, onLinked, onDeleted, 
                       <div className="flex items-center gap-3 px-4 py-3 bg-gray-50">
                         {editingLocs && (
                           <input type="checkbox" checked={confirmSel.has(loc.companyId)} onChange={() => toggleLoc(loc.companyId)}
-                            className="w-4 h-4 shrink-0 cursor-pointer" title="Genuine studio location" />
+                            className="w-4 h-4 shrink-0 cursor-pointer" title="Genuine branch location" />
                         )}
                         <div className="min-w-0 flex-1">
                           <p className="text-sm font-semibold text-gray-800 truncate">{loc.name}</p>
@@ -1088,7 +1088,7 @@ function AccountModal({ account, owners, isAdmin, onClose, onLinked, onDeleted, 
                   <div className="border border-dashed border-gray-300 rounded-xl overflow-hidden">
                     <div className="px-4 py-3 bg-gray-50">
                       <p className="text-sm font-semibold text-gray-600">Undefined</p>
-                      <p className="text-xs text-gray-400">Linked to the parent company — no specific studio</p>
+                      <p className="text-xs text-gray-400">Linked to the parent company — no specific branch</p>
                     </div>
                     <div className="divide-y divide-gray-100">
                       {regions.undefined!.contacts.map(c => <RegionContactRow key={c.id} c={c} companyId="parent" onToggle={toggleRegionDesigner} />)}
@@ -1102,8 +1102,8 @@ function AccountModal({ account, owners, isAdmin, onClose, onLinked, onDeleted, 
           {shownDesignerCount !== null && (
             <div className="bg-blue-50 rounded-xl p-4 flex items-center justify-between">
               <div>
-                <p className="text-sm font-semibold text-blue-900">Designers</p>
-                <p className="text-xs text-blue-500 mt-0.5">everyone across this account's studio locations, minus anyone unticked in Regions</p>
+                <p className="text-sm font-semibold text-blue-900">Buyers</p>
+                <p className="text-xs text-blue-500 mt-0.5">everyone across this account's branch locations, minus anyone unticked in Regions</p>
                 {regions && (
                   <p className="text-xs text-blue-600 mt-1.5 font-medium">
                     {designerScoreCounts.A} A · {designerScoreCounts.B} B · {designerScoreCounts.C} C
@@ -1326,7 +1326,7 @@ function EngagementHub({ managerFilter, onManagerFilterChange, hiddenNames }: { 
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [logging, setLogging] = useState<{ accountName: string; activityKey: string } | null>(null)
-  const [expanded, setExpanded] = useState<Set<string>>(new Set()) // customers whose studios are open
+  const [expanded, setExpanded] = useState<Set<string>>(new Set()) // customers whose branches are open
   const toggleExpand = (name: string) => setExpanded(s => { const n = new Set(s); n.has(name) ? n.delete(name) : n.add(name); return n })
 
   useEffect(() => {
@@ -1406,12 +1406,12 @@ function EngagementHub({ managerFilter, onManagerFilterChange, hiddenNames }: { 
     if (loc.city) return loc.city                              // no suffix in the name → use the city ("Wingates" → "Auckland")
     return loc.name
   }
-  // Collapsed-header summary for a derived column: how many of the customer's studios are green.
+  // Collapsed-header summary for a derived column: how many of the customer's branches are green.
   const rollupCell = (a: ActivityMeta, locs: ActivityLocation[]) => {
     const greens = locs.filter(l => l.activity[a.key]?.status === 'green').length
     const ok = greens === locs.length && locs.length > 0
     return (
-      <td key={a.key} className={`px-3 py-3 text-center ${ok ? '' : 'bg-red-100'}`} title={`${greens}/${locs.length} studios in the last ${windowText(a.staleDays)}`}>
+      <td key={a.key} className={`px-3 py-3 text-center ${ok ? '' : 'bg-red-100'}`} title={`${greens}/${locs.length} branches in the last ${windowText(a.staleDays)}`}>
         <span className={`text-[11px] font-semibold ${ok ? 'text-green-700' : 'text-red-600'}`}>{greens}/{locs.length}</span>
       </td>
     )
@@ -1459,8 +1459,8 @@ function EngagementHub({ managerFilter, onManagerFilterChange, hiddenNames }: { 
               <tr><td colSpan={data.activities.length + (managerFilter === 'all' ? 2 : 1)} className="px-4 py-8 text-center text-sm text-gray-400">No accounts for this salesperson</td></tr>
             )}
             {rows.flatMap(acc => {
-              // Only split into per-studio sub-rows when there are 2+ locations. A single
-              // studio (or none) renders as one clean customer row — no redundant sub-row.
+              // Only split into per-branch sub-rows when there are 2+ locations. A single
+              // branch (or none) renders as one clean customer row — no redundant sub-row.
               const curated = (acc.locations?.length ?? 0) > 1
               // Uncurated / single-location → single row with all 5 columns (unchanged behaviour).
               if (!curated) {
@@ -1473,12 +1473,12 @@ function EngagementHub({ managerFilter, onManagerFilterChange, hiddenNames }: { 
                 )]
               }
               // Curated → a collapsible customer header row (manual columns clickable; the
-              // auto columns show a studios-green rollup) + one sub-row per studio when open.
+              // auto columns show a branches-green rollup) + one sub-row per branch when open.
               const open = expanded.has(acc.name)
               return [
                 <tr key={acc.name} className="bg-gray-50/60 border-t border-gray-100">
                   <td className="px-4 py-3 font-semibold text-gray-800 whitespace-nowrap">
-                    <button onClick={() => toggleExpand(acc.name)} className="inline-flex items-center gap-1.5 hover:text-gray-900" title={open ? 'Hide studios' : 'Show studios'}>
+                    <button onClick={() => toggleExpand(acc.name)} className="inline-flex items-center gap-1.5 hover:text-gray-900" title={open ? 'Hide branches' : 'Show branches'}>
                       <svg className={`w-3.5 h-3.5 text-gray-400 transition-transform ${open ? 'rotate-90' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                       {acc.name}
                       <span className="text-[10px] font-medium text-gray-400">({acc.locations!.length})</span>
@@ -1486,7 +1486,7 @@ function EngagementHub({ managerFilter, onManagerFilterChange, hiddenNames }: { 
                   </td>
                   {managerFilter === 'all' && <td className="px-3 py-3 text-gray-400 whitespace-nowrap">{acc.manager}</td>}
                   {/* Header shows the CLIENT-level status (green dot, as before); expand for
-                      the per-studio breakdown. Derived read-only; manual clickable to log. */}
+                      the per-branch breakdown. Derived read-only; manual clickable to log. */}
                   {data.activities.map(a => filledCell(a, acc.activity[a.key], a.derived ? null : acc.name))}
                 </tr>,
                 ...(open ? acc.locations!.map(loc => (

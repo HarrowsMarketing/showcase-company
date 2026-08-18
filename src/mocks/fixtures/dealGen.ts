@@ -7,10 +7,10 @@ import { pick, randInt, type Rng } from '../prng'
 import { CE_ACCOUNTS, SALES_TEAM_NAMES } from './company'
 
 export const PROJECT_TYPES = [
-  'HQ Fitout', 'Office Refresh', 'Boardroom Package', 'Reception Redesign',
-  'Breakout Furniture', 'Ergonomic Upgrade', 'Campus Expansion', 'Branch Rollout',
-  'Executive Suite', 'Collaboration Zone', 'Warehouse Racking', 'Training Room Fitout',
-  'Open-Plan Refit', 'Height-Adjustable Desking', 'Staff Café Furniture', 'Library Redesign',
+  'Power Tool Range Order', 'Hand Tool Bulk Order', 'Cordless Tool Bundle', 'Trade Account Setup',
+  'Seasonal Restock Order', 'Exclusive Distribution Deal', 'Catalogue Expansion', 'Private Label Tool Range',
+  'Warranty Program Rollout', 'Retail Display Package', 'Warehouse Stock Order', 'Trade Show Order',
+  'New Store Opening Order', 'Accessory Line Expansion', 'Branch Rollout Order', 'Annual Supply Agreement',
 ]
 
 // Open-pipeline stages, roughly in order, each with a typical HubSpot-style
@@ -27,7 +27,7 @@ export const WON_STAGE = 'Closed Won'
 export const LOST_STAGE = 'Closed Lost'
 
 const GENERIC_COMPANY_NAMES = [
-  'Kestrel Interiors Ltd', 'Bramwell & Co', 'Northgate Trading', 'Fenwick Holdings',
+  'Kestrel Trading Ltd', 'Bramwell & Co', 'Northgate Trading', 'Fenwick Holdings',
   'Silverline Ventures', 'Marlow Group', 'Thackeray Partners', 'Coastal Ridge Ltd',
 ]
 

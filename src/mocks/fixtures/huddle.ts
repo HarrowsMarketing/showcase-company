@@ -32,16 +32,16 @@ function meetingFor(week: string, status: 'open' | 'completed') {
   const meeting = {
     id: `huddle-${week}`, week_start: week, status,
     notes: {
-      review: { Marketing: { good: 'Strong organic traffic growth this week.', bad: '', interesting: 'Referral traffic from a design blog spiked.' } },
+      review: { Marketing: { good: 'Strong organic traffic growth this week.', bad: '', interesting: 'Referral traffic from a trade industry blog spiked.' } },
       sales: 'Pipeline tracking to target this month.',
       marketing: 'Spring campaign creative in final review.',
       social: 'New reel performing well — 3x average reach.', socialImages: [],
-      blogs: 'Height-adjustable desk guide drafted, publishing Friday.',
+      blogs: 'Cordless drill buying guide drafted, publishing Friday.',
       edms: 'August newsletter scheduled for Thursday.',
       newsletter: '',
       campaigns: 'EOFY campaign planning underway.',
       tasks: Object.fromEntries(MARKETING_TEAM.map(m => [m.name, pick(rng, ['On track', 'Blocked on approval', 'Not started yet', ''])])),
-      blockers: Object.fromEntries(MARKETING_TEAM.map(m => [m.name, pick(rng, ['', '', 'Waiting on client sign-off', 'Needs design resource'])])),
+      blockers: Object.fromEntries(MARKETING_TEAM.map(m => [m.name, pick(rng, ['', '', 'Waiting on client sign-off', 'Needs content resource'])])),
     },
     snapshot: buildSnapshot(week),
     completed_by: status === 'completed' ? pick(rng, MARKETING_TEAM).name : null,
@@ -75,8 +75,8 @@ export function huddleComplete(id: string) {
 const ideaSeed = (() => {
   const rng = rngFor('huddle-ideas')
   const bodies = [
-    'What if we did a behind-the-scenes reel of the fitout install process?',
-    'Idea: partner with a design blog for a sponsored feature on ergonomic seating.',
+    'What if we did a behind-the-scenes reel of the warehouse pick-and-pack process?',
+    'Idea: partner with a trade blog for a sponsored feature on our cordless tool range.',
     'Could we run a LinkedIn poll about hybrid workspace preferences?',
     'Worth trying a short customer testimonial video series?',
   ]

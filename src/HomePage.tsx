@@ -78,7 +78,7 @@ const DEPARTMENTS: Department[] = [
   {
     id: 'projects',
     label: 'Project Management',
-    description: 'Install job cards, EOD reports & project tracking',
+    description: 'Job cards, EOD reports & operations tracking',
     live: true,
     color: '#14B8A6',
     icon: (
