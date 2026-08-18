@@ -25,12 +25,14 @@ import LeadershipDashboard from './tabs/LeadershipDashboard'
 import TopFiveScoreboard from './tabs/TopFiveScoreboard'
 import ManagementKPIs from './tabs/ManagementKPIs'
 import SampleRegister from './tabs/SampleRegister'
+import InstallTracker from './tabs/InstallTracker'
 
 const DEPT_TABS: Record<string, string[]> = {
   marketing: ['Marketing Dashboard', 'Marketing KPIs', 'SEO Dashboard', 'MQL Engagement', 'Planner', 'Social Media', 'Monday Huddle', 'Content Plan FY26/27'],
   sales: ['Display Dashboard', 'Daily Meeting', 'Sales Dashboard', 'KPIs', 'Sales Breakdown', 'Client Development', 'Forecast', 'Clean-up'],
   management: ['Leadership Dashboard', 'Top 5 - Scoreboard', 'Management KPIs'],
   production: ['Sample Register'],
+  projects: ['Install Tracker'],
 }
 
 // Demo mode: there is no real auth, so a single fixed "demo user" is treated
@@ -211,6 +213,7 @@ function AuthedApp() {
         {dept === 'management' && activeTab === 1 && <TopFiveScoreboard key={refreshKey} />}
         {dept === 'management' && activeTab === 2 && <ManagementKPIs key={refreshKey} />}
         {dept === 'production' && activeTab === 0 && <SampleRegister key={refreshKey} />}
+        {dept === 'projects' && activeTab === 0 && <InstallTracker key={refreshKey} />}
         {!DEPT_TABS[dept] && (
           <div className="bg-white rounded-2xl border border-gray-200 p-12 text-center text-sm text-gray-400">
             This dashboard isn't built yet — check back soon.

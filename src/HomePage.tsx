@@ -78,7 +78,7 @@ const DEPARTMENTS: Department[] = [
   {
     id: 'projects',
     label: 'Project Management',
-    description: 'Job cards, EOD reports & operations tracking',
+    description: 'Install job cards, crew scheduling & EOD reports',
     live: true,
     color: '#14B8A6',
     icon: (
@@ -86,7 +86,6 @@ const DEPARTMENTS: Department[] = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
       </svg>
     ),
-    externalUrl: 'https://installs.yourcompany.io',
   },
   {
     id: 'finance',

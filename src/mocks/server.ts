@@ -24,6 +24,7 @@ import { MQL_CONTACTS, MQL_SQL_QUEUE, contactBrief, LIFECYCLE_STAGES } from './f
 import { huddleWeeks, huddleForWeek, huddlePatchNotes, huddleComplete, ideasStore, addIdea, deleteIdea } from './fixtures/huddle'
 import { ADMIN_USERS, ADMIN_AUDIT_LOG, ADMIN_TARGETS, FORWARD_ORDER_TARGET, ADMIN_ACCESS_DEPTS, HUBSPOT_OWNERS, CE_OWNERS, CE_SALESPEOPLE, managementEmailStore } from './fixtures/admin'
 import { MARKETING_TARGETS, focusTasksStore, priorityOrderStore, samplesStore, ANALYSIS_RESULTS, analysisRun } from './fixtures/misc'
+import { installsStore, INSTALL_CREW } from './fixtures/installs'
 
 type Ctx = { match: RegExpMatchArray; params: URLSearchParams; body: any }
 type Route = { method: string; pattern: RegExp; handler: (ctx: Ctx) => any }
@@ -206,6 +207,33 @@ const ROUTES: Route[] = [
   } },
   { method: 'DELETE', pattern: /^\/api\/production\/samples\/([^/]+)$/, handler: ctx => { samplesStore.samples = samplesStore.samples.filter(x => x.id !== ctx.match[1]); return ok() } },
   { method: 'POST', pattern: /^\/api\/production\/sample-upload$/, handler: () => ({ url: 'https://picsum.photos/seed/sample/600/450' }) },
+
+  // ── Install Tracker ("Project Management") ────────────────────────────────
+  { method: 'GET', pattern: /^\/api\/installs\/jobs$/, handler: () => installsStore.jobs },
+  { method: 'GET', pattern: /^\/api\/installs\/crew$/, handler: () => ({ crew: INSTALL_CREW }) },
+  { method: 'POST', pattern: /^\/api\/installs\/jobs$/, handler: ctx => {
+    const job = {
+      id: `install-${Date.now()}`,
+      display_id: `INST-${String(installsStore.jobs.length + 1).padStart(4, '0')}`,
+      status: 'scheduled', completedDate: null, notes: '', eodReports: [], crew: [],
+      ...ctx.body,
+    }
+    installsStore.jobs.unshift(job)
+    return job
+  } },
+  { method: 'PATCH', pattern: /^\/api\/installs\/jobs\/([^/]+)$/, handler: ctx => {
+    const job = installsStore.jobs.find(j => j.id === ctx.match[1])
+    if (job) Object.assign(job, ctx.body || {})
+    return job || {}
+  } },
+  { method: 'DELETE', pattern: /^\/api\/installs\/jobs\/([^/]+)$/, handler: ctx => { installsStore.jobs = installsStore.jobs.filter(j => j.id !== ctx.match[1]); return ok() } },
+  { method: 'POST', pattern: /^\/api\/installs\/jobs\/([^/]+)\/eod$/, handler: ctx => {
+    const job = installsStore.jobs.find(j => j.id === ctx.match[1])
+    if (!job) return {}
+    const report = { id: `eod-${Date.now()}`, date: ctx.body?.date || NOW.toISOString().slice(0, 10), crewMember: ctx.body?.crewMember || '', hours: Number(ctx.body?.hours) || 0, notes: ctx.body?.notes || '' }
+    job.eodReports = [report, ...job.eodReports]
+    return job
+  } },
 
   // ── Analysis (Lead Qualifier) ─────────────────────────────────────────────
   { method: 'GET', pattern: /^\/api\/analysis\/results$/, handler: () => ANALYSIS_RESULTS },
